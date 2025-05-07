@@ -1,6 +1,7 @@
 require("dotenv").config();
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const commandHandler = require("./handlers/commandHandler");
+const reminderTask = require("./tasks/reminderTask");
 
 // Création du client Discord
 const client = new Client({
@@ -21,6 +22,8 @@ commandHandler(client);
 // Événement quand le bot est prêt
 client.once("ready", () => {
   console.log(`Bot connecté en tant que ${client.user.tag}!`);
+  // Initialiser la tâche de rappel
+  reminderTask(client);
 });
 
 // Gestion des messages
